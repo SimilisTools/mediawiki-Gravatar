@@ -11,7 +11,13 @@ class GravatarMW {
         
 		$attrs = array();
 		$text = "";
-		
+		$email = null;
+        $default = "mm";
+        $size = null;
+        $rating = "g";
+        $extension = null;
+        $https = true;
+        
 		foreach ( $args as $arg ) {
 			$arg_clean = trim( $frame->expand( $arg ) );
 			$arg_proc = explode( "=", $arg_clean, 2 );
@@ -31,14 +37,55 @@ class GravatarMW {
 				}
 			}
 		}
-    
-		if ( isset( $attrs["email"] ) ) {
+
+        if ( isset( $attrs["user"] ) ) {
+            
+            if ( ! empty( $attrs["user"] ) ) {
+                $user = $attrs["user"];
+                
+                $userObj = User::newFromName( $user );
+                if ( $userObj->getId > 0 ) {
+                    $email = $userObj->getEmail();
+                }
+            } 
+        }
+        
+        if ( isset( $attrs["email"] ) ) {
 
             if ( ! empty( $attrs["email"] ) ) {
-                $text = Gravatar::image( $attrs["email"] );
+                $email = $attrs["email"];
             }
-        
 		}
+                
+        if ( isset( $attrs["size"] ) ) {
+
+            if ( ! empty( $attrs["size"] ) ) {
+                $size = $attrs["size"];
+            }
+		}
+        
+        if ( isset( $attrs["default"] ) ) {
+
+            if ( ! empty( $attrs["default"] ) ) {
+                $default = $attrs["default"];
+            }
+		}
+        
+        if ( isset( $attrs["rating"] ) ) {
+
+            if ( ! empty( $attrs["rating"] ) ) {
+                $rating = $attrs["rating"];
+            }
+		}
+    
+        if ( isset( $attrs["extension"] ) ) {
+
+            if ( ! empty( $attrs["extension"] ) ) {
+                $extension = $attrs["extension"];
+            }
+		}
+    
+        $text = Gravatar::image( $email, $size, $default, $rating, $extension, $https );
         
         return $text;
     
