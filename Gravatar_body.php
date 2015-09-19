@@ -44,7 +44,7 @@ class GravatarMW {
                 $user = $attrs["user"];
                 
                 $userObj = User::newFromName( $user );
-                if ( $userObj->getId > 0 ) {
+                if ( $userObj->getId() > 0 ) {
                     $email = $userObj->getEmail();
                 }
             } 
