@@ -17,6 +17,8 @@ class GravatarMW {
         $rating = "g";
         $extension = null;
         $https = true;
+        $output = "text";
+        $link = null;
         
 		foreach ( $args as $arg ) {
 			$arg_clean = trim( $frame->expand( $arg ) );
@@ -85,7 +87,30 @@ class GravatarMW {
             }
 		}
     
-        $text = Gravatar::image( $email, $size, $default, $rating, $extension, $https );
+        $imgurl = Gravatar::image( $email, $size, $default, $rating, $extension, $https );
+    
+        if ( $output == 'image' ) {
+            
+            if ( isset( $attrs["link"] ) ) {
+                $link =  $attrs["link"];
+            } else {
+                $link = Gravatar::profile( $email );
+            }
+            
+            $tagimg = 	Html::element(
+			'img',
+				array( 'src' => $imgurl )
+            );
+            
+            $out = Html::openElement( "a", array(
+                array( "href" => $link )
+            ) ). $tagimg . $output = Html::closeElement( "a" );
+            
+            $text = $parser->insertStripItem( $out, $parser->mStripState );
+            
+        } else {
+            $text = $imgurl;
+        }
         
         return $text;
     
