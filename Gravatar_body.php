@@ -87,6 +87,13 @@ class GravatarMW {
             }
 		}
     
+	    if ( isset( $attrs["output"] ) ) {
+
+            if ( ! empty( $attrs["output"] ) ) {
+                $output = $attrs["output"];
+            }
+		}
+	
         $imgurl = Gravatar::image( $email, $size, $default, $rating, $extension, $https );
     
         if ( $output == 'image' ) {
