@@ -109,9 +109,9 @@ class GravatarMW {
 				array( 'src' => $imgurl )
             );
             
-            $out = Html::openElement( "a", array(
+            $out = Html::openElement( "a",
                 array( "href" => $link )
-            ) ). $tagimg . $output = Html::closeElement( "a" );
+            ). $tagimg . Html::closeElement( "a" );
             
             $text = $parser->insertStripItem( $out, $parser->mStripState );
             
