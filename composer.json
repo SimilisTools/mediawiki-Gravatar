@@ -4,7 +4,8 @@
 	"description": "Returns Gravatar profile images",
 	"keywords": [
 		"MediaWiki",
-		"Link"
+		"profile",
+		"gravatar"
 	],
 	"homepage": "https://github.com/SimilisTools/mediawiki-Gravatar",
 	"license": "GPL-3.0+",
