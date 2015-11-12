@@ -17,6 +17,7 @@
 	],
 	"require": {
 		"php": ">=5.4.0",
+		"ext-curl": "*",
 		"composer/installers": "1.*,>=1.0.1",
 		"forxer/gravatar" : ">=1.3"
 	},
